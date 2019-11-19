@@ -1,0 +1,76 @@
+.login_bg {
+  width: 100%;
+  height: 100vh;
+  background: url("../assets/logo_bg.png")  no-repeat center 100%;
+  position: relative;
+}
+.mask {
+  width: 100%;
+  height: 90%;
+  background: #32475b;
+  opacity: 0.8;
+}
+.login_box {
+  width: 330px;
+  text-align: center;
+  color: #fff;
+  position: absolute;
+  top: 45%;
+  left: 48%;
+  transform: translate(-40%, -48%);
+}
+
+.login_box /deep/ .el-form-item__label{
+  color: #fff;
+  width: 14px;
+  text-align: left;
+  padding: 0;
+}
+
+/*/deep/ .el-input__inner{*/
+  /*background: red;*/
+/*}*/
+
+.login_box /deep/ .el-input__inner{
+  background: transparent;
+  border: 0;
+  color: #fff;
+  padding: 0 4px;
+}
+
+.login_box /deep/ .el-form-item {
+  border-bottom: 1px solid #ccc;
+}
+
+.login_box /deep/ .el-form-item__content {
+  margin-left: 18px;
+}
+
+.login_img {
+  margin-bottom: 12px;
+}
+
+.login_tip /deep/ .el-checkbox .el-checkbox__label{
+  color: #fff;
+}
+
+.repwd_btn {
+  color: #007dff;
+}
+
+.login_btn_box{
+  margin-top: 22px;
+}
+
+.login_btn_box .login_btn {
+  background: #007dff;
+  width: 100%;
+  font-size: 24px;
+  line-height: 25px;
+  border-radius: 25px;
+}
+
+.ad_text{
+  color: #dbdbdb;
+  margin-top: 12px;
+}
