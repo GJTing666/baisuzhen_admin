@@ -1,75 +1,35 @@
 <template>
   <div class="login_bg register_bg">
     <div class="login_box">
-      <div class="re_title">
+      <div class="reTitle">
         <span>找回登录密码</span>
       </div>
       <el-form :model="formData" ref="form" :rules="rules">
-        <div class="el-form-item">
-          <label class="el-form-item__label">
-            请输入手机号 :
-          </label>
-          <div class="el-form-item__content">
-            <div class="el-input">
-              <input
-                v-model="formData.username"
-                type="text"
-                autocomplete="off"
-                class="el-input__inner"
-              />
-            </div>
+        <el-form-item prop="username">
+          <div class="login_name clearfix">
+            <span class="fl">请输入手机号 : </span>
+            <el-input v-model="formData.username"></el-input>
           </div>
-        </div>
-        <div class="el-form-item clearfix">
-          <div class="fl">
-            <label class="el-form-item__label">
-              请输入验证码 :
-            </label>
-            <div class="el-form-item__content" style="width: 112px;">
-              <div class="el-input">
-                <input
-                  v-model="formData.code"
-                  type="text"
-                  autocomplete="off"
-                  class="el-input__inner"
-                />
-              </div>
+        </el-form-item>
+        <el-form-item prop="code">
+          <div class="login_pwd reCode clearfix">
+            <span class="fl">请输入验证码 : </span>
+            <el-input v-model="formData.code"></el-input>
+            <el-button class="fr" type="default">获取验证码</el-button>
           </div>
+        </el-form-item>
+        <el-form-item prop="password">
+          <div class="login_pwd clearfix">
+            <span class="fl">请输入密码 : </span>
+            <el-input v-model="formData.password"></el-input>
           </div>
-          <div class="fr code_btn">
-            <el-button type="default">获取验证码</el-button>
+        </el-form-item>
+        <el-form-item prop="rePassword">
+          <div class="login_pwd clearfix">
+            <span class="fl">确认新密码 : </span>
+            <el-input v-model="formData.rePassword"></el-input>
           </div>
-        </div>
-        <div class="el-form-item">
-          <label class="el-form-item__label">
-            输入新密码 :
-          </label>
-          <div class="el-form-item__content">
-            <div class="el-input">
-              <input
-                v-model="formData.password"
-                type="password"
-                autocomplete="off"
-                class="el-input__inner"
-              />
-            </div>
-          </div>
-        </div>
-        <div class="el-form-item">
-          <label class="el-form-item__label">
-            确认新密码 :
-          </label>
-          <div class="el-form-item__content">
-            <div class="el-input">
-              <input
-                v-model="formData.rePassword"
-                type="password"
-                autocomplete="off"
-                class="el-input__inner"
-              />
-            </div>
-          </div>
-        </div>
+        </el-form-item>
         <div class="login_btn_box">
           <el-button type="primary" class="login_btn" @click="login('form')">提 交</el-button>
         </div>
@@ -80,34 +40,76 @@
 
 <script>
 export default {
-  data () {
+  data() {
+    var validateName = (rule, value, callback) => {
+      let reName = /^1[345789][0-9]{9}$/
+      if (value === "") {
+        callback(new Error("请输入手机号"))
+      } else if (!reName.test(value)) {
+        callback(new Error("请输入正确手机号"))
+      } else {
+        callback()
+      }
+    };
+    var validateCode = (rule, value, callback) => {
+      if (!value) {
+        callback(new Error("验证码错误"))
+      }else{
+        callback()
+      }
+    };
+    var validatePwd = (rule, value, callback) => {
+      // 密码至少包含 数字和英文，长度6-18
+      let pwdReg = /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,18}$/;
+      if (value === "") {
+        callback(new Error("请输入密码"))
+      }else if (!pwdReg.test(value)) {
+        callback(new Error("密码至少包含 数字和英文，长度6-18位字符"))
+      }else{
+        callback()
+      }
+    };
+    var validateRePwd = (rule, value, callback) => {
+      if (value === '') {
+          callback(new Error('请再次输入密码'))
+        } else if (value !== this.formData.password) {
+          callback(new Error('两次输入密码不一致!'))
+        } else {
+          callback()
+        }
+    };
     return {
       formData: {
-        username: '',
-        code: '',
-        password: '',
-        rePassword: '',
+        username: "",
+        code: "",
+        password: "",
+        rePassword: ""
       },
+      checked: false,
       rules: {
         username: [
-          // { validator: validateName, trigger: "blur" }
-          { required: true, message:"请输入手机号",trigger: "blur" }
+          { validator: validateName, trigger: "blur" }
         ],
         code: [
-          {required: true, message: '', trigger: 'blur'}
+          { validator: validateCode, trigger: "blur" }
         ],
         password: [
-          // { validator: validatePwd, trigger: "blur" }
-          { required: true, message:"请输入密码",trigger: "blur" }
-
+          { validator: validatePwd, trigger: "blur" }
         ],
         rePassword: [
-          {required: true, message: '', trigger: 'blur'}
+          { validator: validateRePwd, trigger: "blur" }
         ]
       }
     }
+  },
+  methods: {
+    login(formName) {
+      this.$refs[formName].validate((valid) => {
+        console.log(valid)
+      })
+    }
   }
-}
+};
 </script>
 
 <style lang="less" scoped>
