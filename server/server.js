@@ -17,7 +17,16 @@ app.use(parserJson)
 
 app.use(parserUrlencoded)
 
-app.get('/login', router.login)
+app.all('*', function (req, res, next) {
+    // 解决跨域
+    res.header("Access-Control-Allow-Origin", "*");
+	res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+	res.header("Access-Control-Allow-Headers", "Content-Type, Content-Length, Authorization, Accept, X-Requested-With");
+    // 继续往下走
+    next();
+})
+
+app.post('/login', router.login)
 
 app.listen(3000, function(){
     console.log('port: 3000')

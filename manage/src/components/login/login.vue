@@ -16,7 +16,7 @@
           <div class="login_pwd clearfix">
             <span class="fl"><i class="el-icon-lock"></i></span>
             <!-- <input type="password" v-model="formData.password" placeholder="密码"> -->
-            <el-input v-model="formData.password" placeholder="密码"></el-input>
+            <el-input type="password" v-model="formData.password" placeholder="密码"></el-input>
           </div>
         </el-form-item>
         <el-form-item>
@@ -26,7 +26,7 @@
           </div>
         </el-form-item>
         <div class="login_btn_box">
-          <el-button type="primary" class="login_btn" @click="login('form')">立即登录</el-button>
+          <el-button :loading="loginLoading" type="primary" class="login_btn" @click="login('form')">立即登录</el-button>
         </div>
         <div class="ad_text">百溯真商家系统后台</div>
       </el-form>
@@ -35,6 +35,8 @@
 </template>
 
 <script>
+import axios from 'axios'
+import {api} from 'js/api.js'
 import logo from "@/assets/logo_login.png"
 export default {
   data() {
@@ -61,6 +63,7 @@ export default {
     };
     return {
       logo,
+      loginLoading: false,
       formData: {
         username: "",
         password: ""
@@ -79,7 +82,43 @@ export default {
   methods: {
     login(formName) {
       this.$refs[formName].validate((valid) => {
-        console.log(valid)
+        if (valid) {
+          this.loginLoading = true
+          axios({
+            url: api + 'login',
+            method: 'post',
+            data: {
+              mobile: this.formData.username,
+              password: this.formData.password
+            }
+          }).then((res) => {
+            this.loginLoading = false
+            if (res.data.status == 200) {
+              // console.log(res.data.data)
+              // 将登录成功返回的数据存入localStorage中
+              window.localStorage.setItem("token", res.data.data.token)
+              window.localStorage.setItem("userInfo", JSON.stringify(res.data.data.userInfo))
+              // 将登录成功返回的数据存入vuex中
+              this.$store.commit('changeUser', res.data.data);
+              this.$message({
+                message: '登录成功',
+                type: 'success',
+                showClose: true,
+                duration: 2000,
+                onClose: () => {
+                  this.$router.push('/forget')
+                }
+              })
+            }else {
+              this.$message({
+                type: 'error',
+                message: res.data.message,
+                showClose: true,
+                duration: 3000
+              })
+            }
+          })
+        }
       })
     }
   }
