@@ -37,7 +37,9 @@
 <script>
 import axios from 'axios'
 import {api} from 'js/api.js'
-import logo from "@/assets/logo_login.png"
+import logo from '@/assets/logo_login.png'
+import {loginRequest} from 'js/axiosRequest'
+
 export default {
   data() {
     var validateName = (rule, value, callback) => {
@@ -79,45 +81,61 @@ export default {
       }
     }
   },
+  // mounted () {
+  //   console.log(this)
+  // },
   methods: {
     login(formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
           this.loginLoading = true
-          axios({
-            url: api + 'login',
-            method: 'post',
+          loginRequest({
             data: {
               mobile: this.formData.username,
               password: this.formData.password
-            }
-          }).then((res) => {
-            this.loginLoading = false
-            if (res.data.status == 200) {
-              // console.log(res.data.data)
-              // 将登录成功返回的数据存入localStorage中
-              window.localStorage.setItem("token", res.data.data.token)
-              window.localStorage.setItem("userInfo", JSON.stringify(res.data.data.userInfo))
-              // 将登录成功返回的数据存入vuex中
-              this.$store.commit('changeUser', res.data.data);
-              this.$message({
-                message: '登录成功',
-                type: 'success',
-                showClose: true,
-                duration: 2000,
-                onClose: () => {
-                  this.$router.push('/forget')
-                }
-              })
-            }else {
-              this.$message({
-                type: 'error',
-                message: res.data.message,
-                showClose: true,
-                duration: 3000
-              })
+            },
+            error: () => {
+              this.loginLoading = false
+              console.log(err)
+            },
+            success: (res) => {
+              this.loginLoading = false
+              if (res.status == 200) {
+                // console.log(res.data)
+                // 将登录成功返回的数据存入localStorage中
+                window.localStorage.setItem("token", res.data.token)
+                window.localStorage.setItem("userInfo", JSON.stringify(res.data.userInfo))
+                // 将登录成功返回的数据存入vuex中
+                this.$store.commit('changeUser', res.data);
+                this.$message({
+                  message: '登录成功',
+                  type: 'success',
+                  showClose: true,
+                  duration: 2000,
+                  onClose: () => {
+                    this.$router.push('/forget')
+                  }
+                })
+              }else {
+                this.$message({
+                  type: 'error',
+                  message: res.message,
+                  showClose: true,
+                  duration: 3000
+                })
+              }
             }
           })
+          // this.$request(
+          //   'login',
+          //   'post',
+          // ).then((res) => {
+          //   console.log(res)
+          //
+          // }).catch((err) => {
+          //   this.loginLoading = false
+          //   console.log(err)
+          // })
         }
       })
     }
