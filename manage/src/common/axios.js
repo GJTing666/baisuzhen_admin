@@ -4,7 +4,7 @@ import axios from 'axios'
 import {api} from './api'
 import qs from 'qs'
 
-// axios.defaults.baseURL = api
+axios.defaults.baseURL = api
 
 // 请求拦截
 axios.interceptors.request.use(function(config){
@@ -13,7 +13,7 @@ axios.interceptors.request.use(function(config){
   if(token) {
     config.headers['token'] = token
   }
-  console.log(config)
+  // console.log(config)
   return config
 }, function(error){
 

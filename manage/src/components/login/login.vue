@@ -94,7 +94,7 @@ export default {
               mobile: this.formData.username,
               password: this.formData.password
             },
-            error: () => {
+            error: (err) => {
               this.loginLoading = false
               console.log(err)
             },
@@ -113,7 +113,7 @@ export default {
                   showClose: true,
                   duration: 2000,
                   onClose: () => {
-                    this.$router.push('/forget')
+                    this.$router.push('/')
                   }
                 })
               }else {
@@ -126,16 +126,6 @@ export default {
               }
             }
           })
-          // this.$request(
-          //   'login',
-          //   'post',
-          // ).then((res) => {
-          //   console.log(res)
-          //
-          // }).catch((err) => {
-          //   this.loginLoading = false
-          //   console.log(err)
-          // })
         }
       })
     }

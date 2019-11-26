@@ -7,6 +7,8 @@ import store from './store'
 import ElementUI from 'element-ui'
 // import 'element-ui/lib/theme-chalk/index.css'
 import '@/css/element-variables.scss'
+import 'iconfont/iconfont.css'
+import 'css/public.less'
 import {request, get, post} from 'js/axios'
 
 Vue.config.productionTip = false

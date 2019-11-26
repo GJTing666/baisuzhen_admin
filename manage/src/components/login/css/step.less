@@ -1,0 +1,48 @@
+@step_color: #c0c4cc;
+.step_box {
+  width: 54%;
+  margin: 0 auto;
+  margin-top: 66px;
+  //.el-steps--horizontal {
+  //  margin-bottom: 66px;
+  //}
+  .first_step, .second_step {
+    .el-step__title {
+      margin-left: -36px;
+    }
+  }
+  .third_step {
+    .el-step__title {
+      margin-left: -13px;
+    }
+  }
+  .el-step__icon{
+    &.is-icon {
+      width: 22px;
+    }
+  }
+  .el-step__head {
+    &.is-process {
+      color: @step_color;
+    }
+  }
+  .el-step__title {
+    &.is-finish {
+      color: #333;
+    }
+    &.is-process {
+      color: @step_color;
+      font-weight: normal;
+    }
+  }
+}
+
+.first_step_cont {
+  margin-top: 66px;
+  .step_tips {
+    p{
+      height: 20px;
+      line-height: 20px;
+    }
+  }
+}

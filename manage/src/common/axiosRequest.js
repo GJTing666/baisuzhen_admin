@@ -8,7 +8,7 @@ let loginRequest = (params) => {
   request('login', 'post', params.data).then((res) => {
     params.success(res)
   }).catch((err) => {
-    params.error()
+    params.error(err)
   })
 }
 

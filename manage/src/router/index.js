@@ -2,6 +2,8 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Login from 'components/login/login.vue'
 import Forget from 'components/login/forget.vue'
+import Index from 'components/index'
+import Step from 'components/login/step.vue'
 
 Vue.use(Router)
 
@@ -9,8 +11,8 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'login',
-      component: Login
+      name: 'index',
+      component: Index
     },
     {
       path: '/login',
@@ -20,6 +22,11 @@ export default new Router({
     {
       path: '/forget',
       component: Forget
+    },
+    {
+      path: '/step',
+      name: 'order',
+      component: Step
     }
   ]
 })

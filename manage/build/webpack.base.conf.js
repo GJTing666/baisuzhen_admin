@@ -29,7 +29,9 @@ module.exports = {
       '@': resolve('src'),
       'components': resolve('src/components'),
       'css': resolve('src/css'),
-      'js': resolve('src/common')
+      'js': resolve('src/common'),
+      'images': resolve('src/images'),
+      'iconfont': resolve('src/iconfont')
     }
   },
   module: {
