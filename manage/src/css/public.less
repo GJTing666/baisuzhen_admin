@@ -7,6 +7,11 @@
   box-sizing: border-box;
  }
 
+a {
+  text-decoration: none;
+  color: @color-main;
+}
+
 li {
   list-style: none;
 }
@@ -28,3 +33,72 @@ li {
   color: @color-main;
 }
 
+.text-white {
+  color: @text-white;
+}
+
+.text-center {
+  text-align: center;
+}
+.text-left{
+  text-align: left;
+}
+.text-right{
+  text-align: right;
+}
+
+// font-size 2-34
+.font-new(17,1);
+.font-new(@fontMax,@fontMin:1,@fontSize:2*@fontMin) when(@fontMin<=@fontMax){
+  .font-@{fontSize}{
+    font-size:@fontMin * 2px;
+  }
+  .font-new(@fontMax,@fontMin+1)
+}
+// padding margin 5 10 15 20 25 30 ... 50
+.distance(10,1);
+.distance(@count,@i:1 ,@dis:5*@i) when (@i<=@count){
+  .padding-@{dis}{
+    padding:@i*5px;
+  }
+  .padding-l-@{dis}{
+    padding-left:@i*5px;
+  }
+  .padding-r-@{dis}{
+    padding-right:@i*5px;
+  }
+  .padding-t-@{dis}{
+    padding-top:@i*5px;
+  }
+  .padding-b-@{dis}{
+    padding-bottom:@i*5px;
+  }
+  .padding-lr-@{dis}{
+    padding:0 @i*5px;
+  }
+  .padding-tb-@{dis}{
+    padding:@i*5px 0;
+  }
+  .margin-@{dis}{
+    margin:@i*5px;
+  }
+  .margin-l-@{dis}{
+    margin-left:@i*5px;
+  }
+  .margin-r-@{dis}{
+    margin-right:@i*5px;
+  }
+  .margin-t-@{dis}{
+    margin-top:@i*5px;
+  }
+  .margin-b-@{dis}{
+    margin-bottom:@i*5px;
+  }
+  .margin-lr-@{dis}{
+    margin:0 @i*5px;
+  }
+  .margin-tb-@{dis}{
+    margin:@i*5px 0;
+  }
+  .distance(@count,@i+1)
+}

@@ -7,8 +7,8 @@
         <el-step class="second_step" title="选择功能模块" icon="el-icon-success"></el-step>
         <el-step class="third_step" title="菜单配置" icon="el-icon-success"></el-step>
       </el-steps>
-      <conponent :changeStep="changeStep" :is="view"></conponent>
     </div>
+    <conponent :changeStep="changeStep" :is="view"></conponent>
   </div>
 </template>
 
