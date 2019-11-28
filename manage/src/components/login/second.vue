@@ -36,6 +36,20 @@ export default {
   },
   methods: {
     changeSt () {
+      let index = this.$store.state.step.tabIndex
+      let moduleData = []
+      if (index === 1) {
+        moduleData = this.$store.state.step.moduleList
+      } else {
+        moduleData = this.$store.state.step.chooseModuleList
+        if (moduleData.length <=0) {
+          this.$message({
+            type: 'error',
+            message: '请至少选择一个功能模块'
+          })
+          return false
+        }
+      }
       this.changeStep(3)
     }
   },
@@ -52,8 +66,10 @@ export default {
         }
         if (i == 1) {
           this.view = 'curModule'
+          this.$store.commit('changeTabIndex', i)
         } else if (i == 2) {
           this.view = 'cusModule'
+          this.$store.commit('changeTabIndex', i)
         }
       }
     }

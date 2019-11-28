@@ -8,7 +8,7 @@
         ------世界上最动人的情话不是＂我爱你＂，而
         是她听到男友对别的女生说＂我有女朋友，不可以乱来＂的安全感！</p>
     </div>
-    <div class="module_lists clearfix">
+    <div class="module_lists">
       <Module></Module>
     </div>
   </div>
