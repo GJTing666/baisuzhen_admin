@@ -4,6 +4,9 @@ import Login from 'components/login/login.vue'
 import Forget from 'components/login/forget.vue'
 import Index from 'components/index'
 import Step from 'components/login/step.vue'
+import First from 'components/login/first.vue'
+import Second from 'components/login/second.vue'
+import Third from 'components/login/third.vue'
 
 Vue.use(Router)
 

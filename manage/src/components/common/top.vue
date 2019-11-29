@@ -7,7 +7,7 @@
     <div class="fr main_top_right clearfix">
       <div class="unameImg fl"><img class="imgq" :src="nameImg"></img></div>
       <a class="r_uname">admin</a>
-      <a><i class="iconfont icon-tuichu"></i> 退出</a>
+      <a class="sign_out"><i class="iconfont icon-tuichu"></i> 退出</a>
     </div>
   </div>
 </template>

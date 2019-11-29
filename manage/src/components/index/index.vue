@@ -1,11 +1,26 @@
 <template>
-  <div>首页</div>
+  <div class="main_container">
+    <el-container>
+      <el-header><Top></Top></el-header>
+      <el-container>
+        <el-aside><Left></Left></el-aside>
+        <el-main>Main</el-main>
+      </el-container>
+    </el-container>
+  </div>
 </template>
 
 <script>
-export default {}
+import Top from 'components/common/top.vue'
+import Left from 'components/common/left.vue'
+export default {
+  components: {
+    Top,
+    Left
+  }
+}
 </script>
 
-<style>
-
+<style lang="less">
+@import "../../css/main_index.less";
 </style>

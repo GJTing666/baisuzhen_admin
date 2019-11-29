@@ -36,12 +36,11 @@ export default {
       // 选择的模块
       let isChecked = moduleList[index].isChecked
       let moduleDtaList = []
-      if (this.tabIndex === 1) {
-        moduleDtaList = this.$store.state.step.moduleList
-      } else {
+      if (this.tabIndex === 2) {
         moduleDtaList = moduleList.filter((item) => {
           return item.isChecked
         })
+        console.log(moduleDtaList)
       }
       this.$store.commit('changechooseModule', {
         moduleDtaList,

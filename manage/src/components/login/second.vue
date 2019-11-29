@@ -40,15 +40,7 @@ export default {
       let moduleData = []
       if (index === 1) {
         moduleData = this.$store.state.step.moduleList
-      } else {
-        moduleData = this.$store.state.step.chooseModuleList
-        if (moduleData.length <=0) {
-          this.$message({
-            type: 'error',
-            message: '请至少选择一个功能模块'
-          })
-          return false
-        }
+        this.$store.commit('ccModuleList', moduleData)
       }
       this.changeStep(3)
     }

@@ -28,7 +28,7 @@ let state = {
       id: 5
     }
   ],
-  chooseModuleList: []
+  chooseModuleList: ''
 }
 
 let mutations = {
@@ -36,11 +36,15 @@ let mutations = {
   changeTabIndex (state, index) {
     state.tabIndex = index
   },
-  // 选择的模块
+  // 通用选择的模块为moduleList
+  ccModuleList (state, module) {
+    state.chooseModuleList = module
+  },
+  // 自定义选择的模块
   changechooseModule (state, data) {
+    // console.log(data.index)
     if (data.moduleDtaList && data.isChecked == true) {
-      state.chooseModuleList.push(data)
-      // console.log(state.chooseModuleList, data.index, data.isChecked)
+      state.chooseModuleList = data.moduleDtaList
       // 设置chooseModuleList的数组内数据的index等于data.index
       state.chooseModuleList[data.index].index = data.index
     } else {
